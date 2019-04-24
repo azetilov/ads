@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Advertisement API",
+    "description": "A test advertisement API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "paths": {
+    "/api/v1/Ads/{id}": {
+      "get": {
+        "tags": [
+          "Ads"
+        ],
+        "summary": "Returns a particular advertisement",
+        "operationId": "Get",
+        "consumes": [
+
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the advertisement",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The advertisement was found.",
+            "schema": {
+              "$ref": "#/definitions/Ad"
+            }
+          },
+          "404": {
+            "description": "The advertisement was not found."
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Ads"
+        ],
+        "summary": "Updates a particular advertisement",
+        "operationId": "Put",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the advertisement",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "ad",
+            "in": "body",
+            "description": "The updated advertisement",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Ad"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The advertisement was updated."
+          },
+          "404": {
+            "description": "The advertisement was not found."
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Ads"
+        ],
+        "summary": "Deletes a particular advertisement",
+        "operationId": "Delete",
+        "consumes": [
+
+        ],
+        "produces": [
+
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of an advertisement",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The advertisement was deleted."
+          },
+          "404": {
+            "description": "The advertisement was not found."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v1/Ads": {
+      "get": {
+        "tags": [
+          "Ads"
+        ],
+        "summary": "Returns all advertisements",
+        "operationId": "GetAll",
+        "consumes": [
+
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "All advertisements",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ad"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Ads"
+        ],
+        "summary": "Creates a new advertisement",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+
+        ],
+        "parameters": [
+          {
+            "name": "ad",
+            "in": "body",
+            "description": "The advertisement to create",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Ad"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "The advertisement was created. See Location header."
+          },
+          "404": {
+            "description": "The advertisement was not found."
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Ad": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 20,
+          "minLength": 3,
+          "type": "string"
+        }
+      }
+    }
+  }
+}
