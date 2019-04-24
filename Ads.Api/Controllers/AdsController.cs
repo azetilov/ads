@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Ads.Api.Database;
@@ -58,16 +59,19 @@ namespace Ads.Api.Controllers
         /// Returns all advertisements
         /// </summary>
         /// <response code="200">All advertisements</response>
-        /// <returns>All advertisement</returns>
+        /// <returns>All advertisements</returns>
         [HttpGet]
-        public IEnumerable<AdRepresentation> GetAll()
+        public ActionResult<AdsListRepresentation> GetAll()
         {
-            return _context.Ads.AsNoTracking()
+            var ads = _context.Ads.AsNoTracking()
                 .Select(a => new AdRepresentation()
                 {
                     Id = a.Id,
                     Name = a.Name
-                }).ToList();
+                })
+                .ToList();
+            var representation = new AdsListRepresentation(ads, ads.Count, LinkTemplates.V1.Ads.GetAds.CreateLink());
+            return representation;
         }
 
         /// <summary>

@@ -20,12 +20,17 @@ namespace Ads.Api.Representations
                 /// <summary>
                 /// /ads
                 /// </summary>
-                public static Link GetAds { get { return new Link("ads", "~/api/v1/ads"); } }
+                public static Link GetAds => new Link("ads", "~/api/v1/ads");
 
                 /// <summary>
                 /// /ads/{id}
                 /// </summary>
-                public static Link GetAd { get { return new Link("ad", "~/api/v1/ads/{id}"); } }
+                public static Link GetAd => new Link("ad", "~/api/v1/ads/{id}");
+
+                /// <summary>
+                /// /ads/{id}/channels
+                /// </summary>
+                public static Link GetChannels => new Link("channels", "~/api/v1/ads/{id}/channels");
             }
         }
     }
