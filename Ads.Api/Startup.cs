@@ -77,7 +77,6 @@ namespace Ads.Api
         /// <param name="app"></param>
         /// <param name="env"></param>
         /// <param name="provider"></param>
-        /// <param name="loggingBuilder"></param>
         public void Configure(
             IApplicationBuilder app,
             IHostingEnvironment env,

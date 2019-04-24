@@ -3,7 +3,7 @@ using WebApi.Hal;
 namespace Ads.Api.Representations
 {
     /// <summary>
-    /// The HAL representation of advertisement
+    /// HAL representation of the advertisement
     /// </summary>
     public class AdRepresentation : Representation
     {
