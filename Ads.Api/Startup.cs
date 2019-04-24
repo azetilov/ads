@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -27,7 +29,16 @@ namespace Ads.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvcCore()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonFormatters(
+                options =>
+                {
+                    options.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    options.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+            services.TryAddEnumerable(
+                ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, FormattersMvcOptionsSetup>());
             services.AddApiVersioning(
                 options =>
                 {
@@ -35,7 +46,7 @@ namespace Ads.Api
                     // "api-supported-versions" and "api-deprecated-versions"
                     options.ReportApiVersions = true;
                     options.ApiVersionReader = new UrlSegmentApiVersionReader();
-                } );
+                });
             services.AddVersionedApiExplorer(
                 options =>
                 {
@@ -46,7 +57,7 @@ namespace Ads.Api
                     // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
                     // can also be used to control the format of the API version in route templates
                     options.SubstituteApiVersionInUrl = true;
-                } );
+                });
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerOptions>();
             services.AddSwaggerGen(
                 options =>
@@ -55,15 +66,25 @@ namespace Ads.Api
                     options.OperationFilter<SwaggerDefaults>();
 
                     // integrate xml comments
-                    options.IncludeXmlComments( XmlCommentsFilePath );
-                } );
+                    options.IncludeXmlComments(XmlCommentsFilePath);
+                });
             services.AddDbContext<AdsContext>(options => options.UseInMemoryDatabase(databaseName: "Advertisements"));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider )
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="provider"></param>
+        /// <param name="loggingBuilder"></param>
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env,
+            IApiVersionDescriptionProvider provider
+        )
         {
-            
+
             if (env.IsDevelopment())
             {
                 using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
@@ -87,20 +108,20 @@ namespace Ads.Api
                 options =>
                 {
                     // build a swagger endpoint for each discovered API version
-                    foreach ( var description in provider.ApiVersionDescriptions )
+                    foreach (var description in provider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint( $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant() );
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
-                } );
+                });
         }
-        
+
         static string XmlCommentsFilePath
         {
             get
             {
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var fileName = typeof( Startup ).GetTypeInfo().Assembly.GetName().Name + ".xml";
-                return Path.Combine( basePath, fileName );
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
             }
         }
     }

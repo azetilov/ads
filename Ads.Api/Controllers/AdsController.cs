@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Ads.Api.Database;
-using Ads.Api.Database.Entities;
+using Ads.Api.Representations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ namespace Ads.Api.Controllers
     [ApiVersion( "1.0" )]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Produces("application/hal+json")]
     public class AdsController : ControllerBase
     {
         private readonly AdsContext _context;
@@ -34,13 +36,21 @@ namespace Ads.Api.Controllers
         /// <response code="404">The advertisement was not found.</response>
         /// <returns>The requested advertisement</returns>
         [HttpGet("{id:long}")]
-        public ActionResult<Ad> Get(long id)
+        [ProducesResponseType(typeof(AdRepresentation), (int)HttpStatusCode.OK)]
+        public ActionResult<AdRepresentation> Get(long id)
         {
-            var result = _context.Ads.AsNoTracking().FirstOrDefault(a => a.Id == id);
+            var result = _context.Ads.AsNoTracking()
+                .Select(a => new AdRepresentation()
+                {
+                    Id = a.Id,
+                    Name = a.Name
+                })
+                .FirstOrDefault(a => a.Id == id);
             if (result == null)
             {
                 return NotFound();
             }
+            result.RepopulateHyperMedia();
             return result;
         }
         
@@ -50,9 +60,14 @@ namespace Ads.Api.Controllers
         /// <response code="200">All advertisements</response>
         /// <returns>All advertisement</returns>
         [HttpGet]
-        public IEnumerable<Ad> GetAll()
+        public IEnumerable<AdRepresentation> GetAll()
         {
-            return _context.Ads.AsNoTracking().ToList();
+            return _context.Ads.AsNoTracking()
+                .Select(a => new AdRepresentation()
+                {
+                    Id = a.Id,
+                    Name = a.Name
+                }).ToList();
         }
 
         /// <summary>
@@ -63,7 +78,7 @@ namespace Ads.Api.Controllers
         /// <response code="201">The advertisement was created. See Location header.</response>
         /// <response code="404">The advertisement was not found.</response>
         [HttpPost]
-        public CreatedAtActionResult Post([FromRoute] string version, [FromBody] Ad ad)
+        public CreatedAtActionResult Post([FromRoute] string version, [FromBody] Ads.Api.Database.Entities.Ad ad)
         {
             ad.Id = default(long);
             var result = _context.Ads.Add(ad);
@@ -80,7 +95,7 @@ namespace Ads.Api.Controllers
         /// <response code="404">The advertisement was not found.</response>
         /// <returns>200 OK on success</returns>
         [HttpPut("{id:long}")]
-        public StatusCodeResult Put(long id, [FromBody] Ad ad)
+        public StatusCodeResult Put(long id, [FromBody] Ads.Api.Database.Entities.Ad ad)
         {
             ad.Id = default(long);
             var exists = _context.Ads.Any(a => a.Id == id);
