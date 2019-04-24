@@ -27,6 +27,7 @@ namespace Ads.Api.Representations
         {
             base.CreateHypermedia();
             Links.Add(LinkTemplates.V1.Ads.GetAds.CreateLink());
+            Links.Add(LinkTemplates.V1.Ads.GetChannels.CreateLink(new { id = Id }));
         }
     }
 }
