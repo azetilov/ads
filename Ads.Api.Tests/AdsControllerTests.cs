@@ -4,6 +4,7 @@ using System.Linq;
 using Ads.Api.Controllers;
 using Ads.Api.Database;
 using Ads.Api.Database.Entities;
+using Ads.Api.Representations;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
@@ -64,7 +65,12 @@ namespace Ads.Api.Tests
             var actual = _adsController.GetAll();
 
             // Assert
-            actual.Should().BeEquivalentTo(ads);
+            actual.Value.Should().BeEquivalentTo(new AdsListRepresentation(new List<AdRepresentation>
+                {
+                    new AdRepresentation { Id = 1, Name = "WWDC", Href = "~/api/v1/ads/1", Rel = "ads"  },
+                    new AdRepresentation { Id = 2, Name = "MWC", Href = "~/api/v1/ads/2", Rel = "ads" }
+                }, 2, LinkTemplates.V1.Ads.GetAds.CreateLink())
+            );
         }
         
         [Fact]
