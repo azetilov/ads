@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Ads.Api.Database.Entities;
 
 namespace Ads.Api.Database
@@ -52,6 +53,30 @@ namespace Ads.Api.Database
                 {
                     Name = "Facebook"
                 }
+            });
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Adds ad channels to the database context
+        /// </summary>
+        /// <param name="context"></param>
+        internal static void AdChannels(AdsContext context)
+        {
+            var ads = context.Ads.ToList();
+            var channels = context.Channels.ToList();
+            ads.ForEach(ad =>
+            {
+                channels.ForEach(channel =>
+                {
+                    context.AdChannels.Add(new AdChannel()
+                    {
+                        Name = string.Join("-", ad.Name, channel.Name),
+                        Ad = ad,
+                        Channel = channel
+                    });
+                });
+                
             });
             context.SaveChanges();
         }

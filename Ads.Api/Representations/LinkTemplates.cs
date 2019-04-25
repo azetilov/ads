@@ -30,7 +30,12 @@ namespace Ads.Api.Representations
                 /// <summary>
                 /// /ads/{id}/channels
                 /// </summary>
-                public static Link GetChannels => new Link("channels", "~/api/v1/ads/{id}/channels");
+                public static Link GetChannels => new Link("adChannels", "~/api/v1/ads/{id}/channels");
+                
+                /// <summary>
+                /// /ads/{id}/channels/{channelId}
+                /// </summary>
+                public static Link GetChannel => new Link("adChannel", "~/api/v1/ads/{id}/channels/{channelId}");
             }
 
             /// <summary>

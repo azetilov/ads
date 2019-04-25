@@ -8,7 +8,7 @@ namespace Ads.Api.Database.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [MinLength(3), MaxLength(20)]

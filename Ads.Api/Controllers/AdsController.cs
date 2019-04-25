@@ -96,7 +96,7 @@ namespace Ads.Api.Controllers
         /// <response code="404">The advertisement was not found.</response>
         /// <returns>200 OK on success</returns>
         [HttpPut("{id:long}")]
-        public StatusCodeResult Put(long id, [FromBody] Ads.Api.Database.Entities.Ad ad)
+        public StatusCodeResult Put(long id, [FromBody] Database.Entities.Ad ad)
         {
             ad.Id = default(long);
             var exists = _context.Ads.Any(a => a.Id == id);
