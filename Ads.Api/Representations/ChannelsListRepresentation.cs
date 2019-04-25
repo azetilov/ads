@@ -3,14 +3,11 @@ using WebApi.Hal;
 
 namespace Ads.Api.Representations
 {
-    /// <summary>
-    /// HAL representation of the list of advertisements
-    /// </summary>
-    public class AdsListRepresentation : SimpleListRepresentation<AdRepresentation>
+    public class ChannelsListRepresentation : SimpleListRepresentation<ChannelRepresentation>
     {
         private readonly Link uriTemplate;
 
-        public AdsListRepresentation(IList<AdRepresentation> res, int totalResults, Link uriTemplate)
+        public ChannelsListRepresentation(IList<ChannelRepresentation> res, int totalResults, Link uriTemplate)
             : base(res)
         {
             this.uriTemplate = uriTemplate;

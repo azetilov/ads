@@ -90,6 +90,7 @@ namespace Ads.Api
                 {
                     var context = scope.ServiceProvider.GetRequiredService<AdsContext>();
                     Seed.Ads(context);
+                    Seed.Channels(context);
                     context.Database.EnsureCreated();
                 }
                 app.UseDeveloperExceptionPage();

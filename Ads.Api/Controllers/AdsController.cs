@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using Ads.Api.Database;
 using Ads.Api.Representations;
@@ -51,7 +49,6 @@ namespace Ads.Api.Controllers
             {
                 return NotFound();
             }
-            result.RepopulateHyperMedia();
             return result;
         }
         
@@ -82,7 +79,7 @@ namespace Ads.Api.Controllers
         /// <response code="201">The advertisement was created. See Location header.</response>
         /// <response code="404">The advertisement was not found.</response>
         [HttpPost]
-        public CreatedAtActionResult Post([FromRoute] string version, [FromBody] Ads.Api.Database.Entities.Ad ad)
+        public CreatedAtActionResult Post([FromRoute] string version, [FromBody] Database.Entities.Ad ad)
         {
             ad.Id = default(long);
             var result = _context.Ads.Add(ad);

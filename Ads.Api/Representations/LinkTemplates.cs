@@ -32,6 +32,22 @@ namespace Ads.Api.Representations
                 /// </summary>
                 public static Link GetChannels => new Link("channels", "~/api/v1/ads/{id}/channels");
             }
+
+            /// <summary>
+            /// Channels link templates
+            /// </summary>
+            public static class Channels
+            {
+                /// <summary>
+                /// /channels
+                /// </summary>
+                public static Link GetChannels => new Link("channels", "~/api/v1/channels");
+
+                /// <summary>
+                /// /channels/{id}
+                /// </summary>
+                public static Link GetChannel => new Link("channel", "~/api/v1/channels/{id}");
+            }
         }
     }
 }
