@@ -37,8 +37,8 @@ namespace Ads.Api
             {
                 Title = "Advertisement API",
                 Version = description.ApiVersion.ToString(),
-                Description = "A test advertisement API",
-                License = new License() { Name = "MIT", Url = "https://opensource.org/licenses/MIT" }
+                Description = "The advertisement API",
+                License = new License() { Name = "MS-PL", Url = "https://opensource.org/licenses/MS-PL" }
             };
 
             if ( description.IsDeprecated )

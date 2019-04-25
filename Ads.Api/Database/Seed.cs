@@ -31,5 +31,29 @@ namespace Ads.Api.Database
             });
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Adds channels to the database context
+        /// </summary>
+        /// <param name="context"></param>
+        internal static void Channels(AdsContext context)
+        {
+            context.Channels.AddRange(new[]
+            {
+                new Channel()
+                {
+                    Name = "GDN"
+                },
+                new Channel()
+                {
+                    Name = "Email"
+                },
+                new Channel()
+                {
+                    Name = "Facebook"
+                }
+            });
+            context.SaveChanges();
+        }
     }
 }
