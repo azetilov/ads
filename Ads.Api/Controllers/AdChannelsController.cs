@@ -48,9 +48,8 @@ namespace Ads.Api.Controllers
                 .ToList();
             return new AdChannelsListRepresentation(
                 adChannels, 
-                adChannels.Count, 
-                //LinkTemplates.V1.Ads.GetChannels.CreateLink(new {id = adId})
-                LinkTemplates.V1.Ads.GetAds.CreateLink()
+                adChannels.Count,
+                LinkTemplates.V1.Ads.GetChannels.CreateLink(new { id = adId})
             );
         }
 

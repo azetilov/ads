@@ -65,9 +65,10 @@ namespace Ads.Api.Database
         {
             var ads = context.Ads.ToList();
             var channels = context.Channels.ToList();
+            var count = 0;
             ads.ForEach(ad =>
             {
-                channels.ForEach(channel =>
+                channels.Skip(count).Take(ads.Count-count).ToList().ForEach(channel =>
                 {
                     context.AdChannels.Add(new AdChannel()
                     {
@@ -76,7 +77,7 @@ namespace Ads.Api.Database
                         Channel = channel
                     });
                 });
-                
+                count++;
             });
             context.SaveChanges();
         }
