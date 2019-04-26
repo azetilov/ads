@@ -60,3 +60,4 @@ For full REST compliance [Media-type versioning](https://github.com/Microsoft/as
 1. API is responsible for advertisement management (CRUD) only - ads/channels processing and execution is out of scope
 1. In-memory storage will be used for proof-of-concept solution. Real-life solution would require actual database
 1. Repository and UnitOfWork patterns can be used at later stages
+1. Async-await usage on backend not justified for this prototype

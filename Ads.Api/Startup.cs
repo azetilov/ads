@@ -29,6 +29,10 @@ namespace Ads.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("LocalOrigins", builder => builder.WithOrigins("localhost:5002"));
+            });
             services.AddMvcCore()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonFormatters(
@@ -95,6 +99,7 @@ namespace Ads.Api
                 app.UseHsts();
             }
 
+            app.UseCors("LocalOrigins");
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
