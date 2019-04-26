@@ -23,11 +23,11 @@ namespace Ads.Api.Database
                 },
                 new Ad()
                 {
-                    Name = "ASP.NET Core"
+                    Name = "Angular"
                 },
                 new Ad()
                 {
-                    Name = "EF Core"
+                    Name = "Microsoft"
                 }
             });
             context.SaveChanges();
@@ -71,7 +71,7 @@ namespace Ads.Api.Database
                 {
                     context.AdChannels.Add(new AdChannel()
                     {
-                        Name = string.Join("-", ad.Name, channel.Name),
+                        Name = string.Join(" - ", ad.Name, channel.Name),
                         Ad = ad,
                         Channel = channel
                     });
