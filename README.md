@@ -6,6 +6,10 @@ Start off with exercising the API root endpoint:
 
 http://localhost:5000/api/v1/
 
+Postman Collection
+
+`./Ads API.postman_collection.json`
+
 Alternatively, API provides Swagger documentation and explorer at:
 
 http://localhost:5000/swagger/index.html
