@@ -21,7 +21,9 @@
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\models\ad.ts" />
+        <Content Include="ClientApp\src\app\models\ad-channel.ts" />
         <Content Include="ClientApp\src\app\models\channel.ts" />
+        <Content Include="ClientApp\src\app\models\hal\adsChannelsListRepresentation.ts" />
         <Content Include="ClientApp\src\app\models\hal\adsListRepresentation.ts" />
         <Content Include="ClientApp\src\app\models\hal\channelsListRepresentation.ts" />
         <None Remove="$(SpaRoot)**" />

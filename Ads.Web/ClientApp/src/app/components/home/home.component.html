@@ -7,15 +7,15 @@
   <tr>
     <th>Id</th>
     <th>Name</th>
-    <th *ngIf="channels">Channels</th>
+    <th>Channels</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let ad of ads">
     <td>{{ ad.id }}</td>
     <td>{{ ad.name }}</td>
-    <td *ngIf="channels">
-      <ul *ngFor="let c of channels">
+    <td *ngIf="adsChannels[ad.id]">
+      <ul *ngFor="let c of adsChannels[ad.id]">
         <li>{{c.name}}</li>
       </ul>
     </td>
