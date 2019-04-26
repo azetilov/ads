@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ads.Api", "Ads.Api\Ads.Api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ads.Api.Tests", "Ads.Api.Tests\Ads.Api.Tests.csproj", "{BC6749C8-C3A6-4234-B611-5D8B40CCD4D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ads.Web", "Ads.Web\Ads.Web.csproj", "{1C852685-6E5A-4234-ACB1-C6A3C5E53CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{BC6749C8-C3A6-4234-B611-5D8B40CCD4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC6749C8-C3A6-4234-B611-5D8B40CCD4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC6749C8-C3A6-4234-B611-5D8B40CCD4D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C852685-6E5A-4234-ACB1-C6A3C5E53CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C852685-6E5A-4234-ACB1-C6A3C5E53CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C852685-6E5A-4234-ACB1-C6A3C5E53CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C852685-6E5A-4234-ACB1-C6A3C5E53CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

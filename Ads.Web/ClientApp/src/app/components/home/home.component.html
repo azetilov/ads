@@ -1,0 +1,18 @@
+<h1>Advertisements</h1>
+
+<p *ngIf="!ads"><em>Loading...</em></p>
+
+<table class='table table-striped' *ngIf="ads">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ad of ads">
+    <td>{{ ad.id }}</td>
+    <td>{{ ad.name }}</td>
+  </tr>
+  </tbody>
+</table>
