@@ -96,17 +96,17 @@ namespace Ads.Api.Controllers
         /// <response code="404">The advertisement was not found.</response>
         /// <returns>200 OK on success</returns>
         [HttpPut("{id:long}")]
-        public StatusCodeResult Put(long id, [FromBody] Database.Entities.Ad ad)
+        public StatusCodeResult Put(long id, [FromBody] AdRepresentation ad)
         {
             ad.Id = default(long);
-            var exists = _context.Ads.Any(a => a.Id == id);
-            if (!exists)
+            var existing = _context.Ads.FirstOrDefault(a => a.Id == id);
+            if (existing == null)
             {
                 return NotFound();
             }
 
-            ad.Id = id;
-            _context.Ads.Update(ad);
+            existing.Name = ad.Name;
+            _context.Ads.Update(existing);
             _context.SaveChanges();
             return Ok();
         }
