@@ -23,8 +23,7 @@
         <Content Include="ClientApp\src\app\models\ad.ts" />
         <Content Include="ClientApp\src\app\models\channel.ts" />
         <Content Include="ClientApp\src\app\models\hal\adsListRepresentation.ts" />
-        <Content Include="ClientApp\src\app\services\ads.service.spec.ts" />
-        <Content Include="ClientApp\src\app\services\ads.service.ts" />
+        <Content Include="ClientApp\src\app\models\hal\channelsListRepresentation.ts" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
         <None Include="ClientApp\src\app\components\app.component.css" />

@@ -1,4 +1,4 @@
-import {Ad} from "../ad";
+import { Ad } from "../ad";
 
 export class AdsListRepresentation {
   totalResults: number;
