@@ -83,17 +83,10 @@ namespace Ads.Api
             IApiVersionDescriptionProvider provider
         )
         {
-
+            SeedDatabase(app);
+            
             if (env.IsDevelopment())
             {
-                using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-                {
-                    var context = scope.ServiceProvider.GetRequiredService<AdsContext>();
-                    Seed.Ads(context);
-                    Seed.Channels(context);
-                    Seed.AdChannels(context);
-                    context.Database.EnsureCreated();
-                }
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -114,6 +107,18 @@ namespace Ads.Api
                         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
                 });
+        }
+
+        private void SeedDatabase(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<AdsContext>();
+                Seed.Ads(context);
+                Seed.Channels(context);
+                Seed.AdChannels(context);
+                context.Database.EnsureCreated();
+            }
         }
 
         static string XmlCommentsFilePath
