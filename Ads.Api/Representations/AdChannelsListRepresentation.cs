@@ -18,12 +18,22 @@ namespace Ads.Api.Representations
         }
 
         public int TotalResults { get; set; }
-
-        protected object UriTemplateSubstitutionParams;
-
+        
+        public override string Rel
+        {
+            get { return "adsChannels"; }
+            set { }
+        }
+        
+        public override string Href
+        {
+            get { return LinkTemplates.V1.Ads.GetChannels.CreateLink(new { id = 1 }).Href; }
+            set { }
+        }
+        
         protected override void CreateHypermedia()
         {
-            Links.Add(new Link { Href = Href, Rel = "self" });
+            Links.Add(new Link { Href = uriTemplate.Href, Rel = "self"});
         }
     }
 }

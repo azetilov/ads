@@ -20,7 +20,7 @@ namespace Ads.Api.Representations
 
         public override string Rel
         {
-            get { return LinkTemplates.V1.Ads.GetChannels.CreateLink(new { id = AdId }).Href; }
+            get { return "adsChannels"; }
             set { }
         }
 
