@@ -21,9 +21,6 @@ export class HomeComponent {
   }
 
   init(adsService: AdsService) {
-    adsService.getChannels().subscribe(result => {
-      this.channels = result._embedded.channels;
-    }, error => console.error(error));
     adsService.getAds().subscribe(result => {
       this.ads = result._embedded.ads;
       this.ads.forEach(ad => {

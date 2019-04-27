@@ -3,6 +3,19 @@
 <div *ngIf="ad">
   <h2>{{ad.name}}</h2>
 
+  <div>
+    <select [(ngModel)]="selectedChannel">
+      <option value="" disabled selected>Add new channel</option>
+      <option *ngFor="let channel of channels" value="{{channels.indexOf(channel)}}">
+        {{channel.name}}
+      </option>
+    </select>
+    <span *ngIf="selectedChannel >= 0">
+      <input readonly type="text" value="{{ad.name}} - {{(channels[selectedChannel] || {}).name}}">
+    </span>
+    <button type="button" class="btn btn-success" (click)="addChannel(ad.id, channels[selectedChannel])">Add</button>
+  </div>
+
   <p *ngIf="!adsChannels"><em>Loading...</em></p>
 
   <table class='table table-striped' *ngIf="adsChannels">

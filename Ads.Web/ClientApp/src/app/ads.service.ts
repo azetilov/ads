@@ -5,6 +5,7 @@ import {AdsListRepresentation} from "./models/hal/adsListRepresentation";
 import {Observable} from "rxjs";
 import {AdsChannelsListRepresentation} from "./models/hal/adsChannelsListRepresentation";
 import {Ad} from "./models/ad.model";
+import {AdChannel} from "./models/ad-channel.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class AdsService {
 
   getAdChannels(adId : number) : Observable<AdsChannelsListRepresentation> {
     return this.http.get<AdsChannelsListRepresentation>(`${this.apiUrl}/ads/${adId}/channels`, this.halJson);
+  }
+
+  addChannel(adChannel: AdChannel) : Observable<any> {
+    return this.http.post(`${this.apiUrl}/ads/${adChannel.ad.id}/channels`, adChannel);
   }
 
   deleteChannel(adId: number, channelId: string) : Observable<any> {
