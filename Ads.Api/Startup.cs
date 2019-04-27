@@ -31,7 +31,11 @@ namespace Ads.Api
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("LocalOrigins", builder => builder.WithOrigins("http://localhost:5002"));
+                options.AddPolicy("LocalOrigins", builder =>
+                {
+                    builder.WithOrigins("http://localhost:5002")
+                        .WithMethods(new [] {"GET", "PUT", "POST", "DELETE", "OPTIONS"});
+                });
             });
             services.AddMvcCore()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
