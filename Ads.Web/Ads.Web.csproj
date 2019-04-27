@@ -20,9 +20,13 @@
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
-        <Content Include="ClientApp\src\app\models\ad.ts" />
-        <Content Include="ClientApp\src\app\models\ad-channel.ts" />
-        <Content Include="ClientApp\src\app\models\channel.ts" />
+        <Content Include="ClientApp\src\app\ads.service.spec.ts" />
+        <Content Include="ClientApp\src\app\ads.service.ts" />
+        <Content Include="ClientApp\src\app\components\manage-ad\manage-ad.component.ts" />
+        <Content Include="ClientApp\src\app\components\manage-ad\manage-ad.component.html" />
+        <Content Include="ClientApp\src\app\models\ad.model.ts" />
+        <Content Include="ClientApp\src\app\models\ad-channel.model.ts" />
+        <Content Include="ClientApp\src\app\models\channel.model.ts" />
         <Content Include="ClientApp\src\app\models\hal\adsChannelsListRepresentation.ts" />
         <Content Include="ClientApp\src\app\models\hal\adsListRepresentation.ts" />
         <Content Include="ClientApp\src\app\models\hal\channelsListRepresentation.ts" />
@@ -35,6 +39,20 @@
         <None Include="ClientApp\src\app\components\fetch-data\fetch-data.component.ts" />
         <None Include="ClientApp\src\app\components\home\home.component.html" />
         <None Include="ClientApp\src\app\components\home\home.component.ts" />
+        <None Remove="ClientApp\src\app\components\counter\**" />
+        <Content Remove="ClientApp\src\app\components\counter\**" />
+        <None Remove="ClientApp\src\app\components\fetch-data\**" />
+        <Content Remove="ClientApp\src\app\components\fetch-data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ClientApp\src\app\components\counter\**" />
+      <Compile Remove="ClientApp\src\app\components\fetch-data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ClientApp\src\app\components\counter\**" />
+      <EmbeddedResource Remove="ClientApp\src\app\components\fetch-data\**" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

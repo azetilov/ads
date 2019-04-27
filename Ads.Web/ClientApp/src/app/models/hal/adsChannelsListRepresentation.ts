@@ -1,7 +1,7 @@
 
-import { AdChannel } from "../ad-channel";
+import { AdChannel } from "../ad-channel.model";
 
-export class ChannelsListRepresentation {
+export class AdsChannelsListRepresentation {
   totalResults: number;
   _embedded : {
     adsChannels: Array<AdChannel>

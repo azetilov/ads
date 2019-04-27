@@ -1,5 +1,5 @@
 
-import { Channel } from "../channel";
+import { Channel } from "../channel.model";
 
 export class ChannelsListRepresentation {
   totalResults: number;

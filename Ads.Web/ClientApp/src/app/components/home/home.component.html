@@ -8,7 +8,7 @@
     <th>Id</th>
     <th>Name</th>
     <th>Channels</th>
-    <th>New Channel</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -19,19 +19,12 @@
       <p *ngIf="!adsChannels[ad.id]"><em>Loading...</em></p>
       <ul *ngIf="adsChannels[ad.id]">
         <li *ngFor="let c of adsChannels[ad.id]">
-          <button>-</button>
           {{c.name}}
         </li>
       </ul>
     </td>
     <td>
-      <p *ngIf="!channels"><em>Loading...</em></p>
-      <div *ngIf="channels">
-        <select>
-          <option  *ngFor="let c of channels" value="{{c.name}}">{{c.name}}</option>
-        </select>
-        <button>+</button>
-      </div>
+      <button (click)="manageAd(ad);">Manage</button>
     </td>
   </tr>
   </tbody>

@@ -1,0 +1,28 @@
+<h1>Manage Advertisement Channels</h1>
+<p *ngIf="!ad"><em>Loading...</em></p>
+<div *ngIf="ad">
+  <h2>{{ad.name}}</h2>
+
+  <p *ngIf="!adsChannels"><em>Loading...</em></p>
+
+  <table class='table table-striped' *ngIf="adsChannels">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Channel</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let channel of adsChannels">
+      <td>{{ channel.id }}</td>
+      <td>{{ channel.name }}</td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="deleteChannel(ad.id, channel.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
