@@ -8,16 +8,30 @@
     <th>Id</th>
     <th>Name</th>
     <th>Channels</th>
+    <th>New Channel</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let ad of ads">
     <td>{{ ad.id }}</td>
     <td>{{ ad.name }}</td>
-    <td *ngIf="adsChannels[ad.id]">
-      <ul *ngFor="let c of adsChannels[ad.id]">
-        <li>{{c.name}}</li>
+    <td>
+      <p *ngIf="!adsChannels[ad.id]"><em>Loading...</em></p>
+      <ul *ngIf="adsChannels[ad.id]">
+        <li *ngFor="let c of adsChannels[ad.id]">
+          <button>-</button>
+          {{c.name}}
+        </li>
       </ul>
+    </td>
+    <td>
+      <p *ngIf="!channels"><em>Loading...</em></p>
+      <div *ngIf="channels">
+        <select>
+          <option  *ngFor="let c of channels" value="{{c.name}}">{{c.name}}</option>
+        </select>
+        <button>+</button>
+      </div>
     </td>
   </tr>
   </tbody>
