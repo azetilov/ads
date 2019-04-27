@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -34,7 +33,8 @@ namespace Ads.Api
                 options.AddPolicy("LocalOrigins", builder =>
                 {
                     builder.WithOrigins("http://localhost:5002")
-                        .WithMethods(new [] {"GET", "PUT", "POST", "DELETE", "OPTIONS"});
+                        .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+                        .WithHeaders("Content-Type");
                 });
             });
             services.AddMvcCore()
